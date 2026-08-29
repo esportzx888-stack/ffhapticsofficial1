@@ -239,39 +239,6 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
                 >
                   {/* Left: Map Controls & Strategic Plan */}
                   <div className="lg:col-span-5 space-y-5">
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-mono text-[#FF9F1C] font-semibold uppercase">
-                          Tactical Map Library ({allMaps.length})
-                        </div>
-                        <span className="text-[10px] text-neutral-400 font-mono">
-                          Category: {activeMapData?.category.toUpperCase()}
-                        </span>
-                      </div>
-                      
-                      {/* Dynamic Tactical Map Selector Pill Grid */}
-                      <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
-                        {allMaps.map((m) => (
-                          <button
-                            key={m.id || m.key}
-                            onClick={() => setSelectedMapKey(m.key)}
-                            className={`px-3 py-1.5 rounded-lg font-heading font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
-                              selectedMapKey === m.key
-                                ? 'bg-[#FF9F1C] text-black shadow-[0_0_15px_rgba(255,159,28,0.3)]'
-                                : 'bg-[#1E1E1E] text-neutral-300 hover:text-white border border-[#2A2A2A]'
-                            }`}
-                          >
-                            <span>{m.name.split(' ')[0]}</span>
-                            {m.isCustom && (
-                              <span className="px-1 py-0.2 bg-black/40 text-[9px] rounded text-white font-mono">
-                                CUSTOM
-                              </span>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
                     {/* View Switcher: Photo / Satellite vs Vector Topo */}
                     <div className="bg-[#141414] p-1.5 rounded-xl border border-[#222] flex items-center justify-between text-xs">
                       <span className="text-neutral-400 font-heading font-bold uppercase text-[11px] px-2">
