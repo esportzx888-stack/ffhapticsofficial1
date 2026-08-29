@@ -370,14 +370,10 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
 
                           {/* Safe Zone Rings Overlay */}
                           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border-2 border-dashed border-[#FF9F1C] bg-[#FF9F1C]/10 flex items-center justify-center pointer-events-none shadow-[0_0_20px_rgba(255,159,28,0.2)]">
-                            <div className="w-24 h-24 rounded-full border border-emerald-400 bg-emerald-400/15 flex items-center justify-center">
-                              <span className="text-[9px] font-heading font-black text-emerald-300 bg-black/80 px-1.5 py-0.5 rounded">
-                                ZONE 4
-                              </span>
-                            </div>
+                            <div className="w-24 h-24 rounded-full border border-emerald-400 bg-emerald-400/15" />
                           </div>
 
-                          {/* Tactical Pins */}
+                          {/* Tactical Pins (Clean icon dots, no text overlay) */}
                           {activeMapData.dropZones?.slice(0, 2).map((dz, idx) => (
                             <div
                               key={idx}
@@ -385,30 +381,26 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
                                 top: idx === 0 ? '30%' : '65%',
                                 left: idx === 0 ? '25%' : '70%',
                               }}
-                              className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5 pointer-events-none"
+                              title={`Drop Zone: ${dz}`}
+                              className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                             >
-                              <div className="w-3.5 h-3.5 rounded-full bg-[#38BDF8] border-2 border-white shadow-lg animate-pulse" />
-                              <span className="text-[9px] font-heading font-black text-[#38BDF8] bg-black/90 px-1.5 py-0.5 rounded border border-[#38BDF8]/40 whitespace-nowrap">
-                                📍 {dz}
-                              </span>
+                              <div className="w-4 h-4 rounded-full bg-[#38BDF8] border-2 border-white shadow-lg animate-pulse" />
                             </div>
                           ))}
 
-                          {/* Dynamic Choke Point Flag */}
+                          {/* Dynamic Choke Point Flag (Clean amber pin, no text overlay) */}
                           {activeMapData.chokePoints?.[0] && (
                             <div
                               style={{ top: '48%', left: '52%' }}
-                              className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5 pointer-events-none"
+                              title={`Choke Point: ${activeMapData.chokePoints[0]}`}
+                              className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                             >
-                              <div className="w-3.5 h-3.5 rounded-full bg-[#FF9F1C] border-2 border-white shadow-lg" />
-                              <span className="text-[9px] font-heading font-black text-[#FF9F1C] bg-black/90 px-1.5 py-0.5 rounded border border-[#FF9F1C]/40 whitespace-nowrap">
-                                ⚠️ {activeMapData.chokePoints[0]}
-                              </span>
+                              <div className="w-4 h-4 rounded-full bg-[#FF9F1C] border-2 border-white shadow-lg" />
                             </div>
                           )}
                         </div>
                       ) : (
-                        /* Vector Map Fallback View */
+                        /* Vector Map Fallback View (Clean, no text overlay) */
                         <svg viewBox="0 0 500 280" className="w-full h-64">
                           {/* Landmass Outlines */}
                           <path
@@ -437,15 +429,10 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
                           <circle cx="295" cy="135" r="55" fill="rgba(255, 159, 28, 0.1)" stroke="#FF9F1C" strokeWidth="2" />
                           <circle cx="305" cy="130" r="25" fill="rgba(52, 211, 153, 0.2)" stroke="#34D399" strokeWidth="1.5" />
 
-                          {/* Drop Locations */}
-                          <circle cx="100" cy="130" r="6" fill="#38BDF8" />
-                          <text x="70" y="152" fill="#38BDF8" fontSize="11" fontWeight="bold">PRIMARY DROP</text>
-
-                          <circle cx="150" cy="220" r="5" fill="#EF4444" />
-                          <text x="140" y="238" fill="#EF4444" fontSize="10" fontWeight="bold">ENEMY CONTEST</text>
-
-                          <circle cx="295" cy="135" r="7" fill="#FF9F1C" />
-                          <text x="310" y="140" fill="#FFFFFF" fontSize="12" fontWeight="bold">★ FINAL CIRCLE HOLD</text>
+                          {/* Drop & Hold Locations (Clean nodes without text overlay) */}
+                          <circle cx="100" cy="130" r="7" fill="#38BDF8" stroke="#FFFFFF" strokeWidth="1.5" />
+                          <circle cx="150" cy="220" r="6" fill="#EF4444" stroke="#FFFFFF" strokeWidth="1.5" />
+                          <circle cx="295" cy="135" r="8" fill="#FF9F1C" stroke="#FFFFFF" strokeWidth="2" />
 
                           {/* Rotation Tactical Arrows */}
                           <path

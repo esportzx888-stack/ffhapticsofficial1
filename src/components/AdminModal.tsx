@@ -1521,12 +1521,8 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                     />
                     <div className="absolute inset-0 bg-tactical-grid opacity-25 pointer-events-none" />
 
-                    {/* HUD Safe Zone Circle Preview */}
-                    <div className="absolute w-44 h-44 rounded-full border-2 border-dashed border-[#FF9F1C] bg-[#FF9F1C]/10 flex items-center justify-center pointer-events-none">
-                      <span className="text-[10px] font-heading font-bold text-[#FF9F1C] bg-black/80 px-2 py-0.5 rounded">
-                        ZONE 3 PREDICTION
-                      </span>
-                    </div>
+                    {/* HUD Safe Zone Circle Preview (Clean tactical ring, no text overlay) */}
+                    <div className="absolute w-44 h-44 rounded-full border-2 border-dashed border-[#FF9F1C] bg-[#FF9F1C]/10 flex items-center justify-center pointer-events-none" />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">

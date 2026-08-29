@@ -260,16 +260,12 @@ export const Hero: React.FC<HeroProps> = ({
                         <img
                           src={mediaConfig?.bermudaMapImage || mediaConfig?.tacticalMaps?.[0]?.imageUrl}
                           alt="Bermuda Map"
-                          className="absolute inset-0 w-full h-full object-cover opacity-45 pointer-events-none"
+                          className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
                         />
                       )}
                       
                       <div className="absolute inset-0 bg-tactical-grid opacity-25 pointer-events-none" />
                       
-                      <div className="relative z-10 flex justify-between text-[9px] font-heading font-bold text-neutral-400">
-                        <span className="text-white bg-black/75 px-1.5 py-0.5 rounded border border-[#333]">CLOCK TOWER</span>
-                        <span className="text-[#FF9F1C] bg-black/75 px-1.5 py-0.5 rounded border border-[#FF9F1C]/40">PEAK [Z4]</span>
-                      </div>
                       <div className="relative my-auto flex items-center justify-center z-10">
                         <svg viewBox="0 0 200 130" className="w-full h-24">
                           <circle cx="110" cy="65" r="38" fill="rgba(255, 159, 28, 0.18)" stroke="#FF9F1C" strokeWidth="1.5" strokeDasharray="3 2" />

@@ -285,7 +285,7 @@ export const InteractiveAppExplorer: React.FC<InteractiveAppExplorerProps> = ({
                   })}
                 </svg>
 
-                {/* Clickable Landmarks on Map */}
+                {/* Clickable Landmarks on Map (Clean tactical waypoint pins with no text overlay on map) */}
                 {landmarks.map((lm) => {
                   const isSelected = rotationPoints.includes(lm.name);
                   const order = rotationPoints.indexOf(lm.name) + 1;
@@ -293,25 +293,23 @@ export const InteractiveAppExplorer: React.FC<InteractiveAppExplorerProps> = ({
                     <button
                       key={lm.name}
                       onClick={() => handleLandmarkClick(lm.name)}
+                      title={`Waypoint: ${lm.name}`}
                       style={{
                         position: 'absolute',
                         left: `${(lm.x / 500) * 85 + 5}%`,
                         top: `${(lm.y / 300) * 75 + 10}%`,
                       }}
-                      className={`group -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer transition-transform hover:scale-110 z-20`}
+                      className="group -translate-x-1/2 -translate-y-1/2 flex items-center justify-center cursor-pointer transition-transform hover:scale-125 z-20"
                     >
                       <div
-                        className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-heading font-black border shadow-lg ${
+                        className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-heading font-black border shadow-lg transition-colors ${
                           isSelected
-                            ? 'bg-[#FF9F1C] text-black border-white shadow-[0_0_15px_rgba(255,159,28,0.8)]'
+                            ? 'bg-[#FF9F1C] text-black border-white shadow-[0_0_15px_rgba(255,159,28,0.8)] scale-110'
                             : 'bg-[#181818]/90 text-white border-[#333] hover:border-[#FF9F1C]'
                         }`}
                       >
-                        {isSelected ? order : <MapPin className="w-3.5 h-3.5" />}
+                        {isSelected ? order : <MapPin className="w-3 h-3" />}
                       </div>
-                      <span className="text-[10px] font-heading font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-black/80 text-white border border-[#222] mt-1 shadow-md whitespace-nowrap">
-                        {lm.name}
-                      </span>
                     </button>
                   );
                 })}
