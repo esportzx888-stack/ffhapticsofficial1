@@ -1,41 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Compass,
   Users2,
   BarChart3,
   MessageSquareCode,
-  Shield,
   Layers,
-  Crosshair,
-  MapPin,
   TrendingUp,
-  Radio,
-  Sparkles,
   Send,
-  Check,
   ChevronRight,
-  Flame,
   Globe2,
-  Swords,
-  Image as ImageIcon,
-  ZoomIn
+  Swords
 } from 'lucide-react';
-import { MediaConfig, TacticalMapItem } from '../types';
-import { DEFAULT_TACTICAL_MAPS } from '../utils/storage';
+import { MediaConfig } from '../types';
 
 interface FeatureShowcaseProps {
   mediaConfig?: MediaConfig;
 }
 
-export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig }) => {
+export const FeatureShowcase: React.FC<FeatureShowcaseProps> = () => {
   const [activeFeature, setActiveFeature] = useState<number>(0);
-  
-  const allMaps: TacticalMapItem[] = mediaConfig?.tacticalMaps || DEFAULT_TACTICAL_MAPS;
-  const [selectedMapKey, setSelectedMapKey] = useState<string>('bermuda');
-  const [viewMode, setViewMode] = useState<'photo' | 'vector'>('photo');
-
-  const activeMapData = allMaps.find((m) => m.key === selectedMapKey) || allMaps[0];
 
   const [chatMessages, setChatMessages] = useState<{ id: string; user: string; role: string; text: string; time: string; verified?: boolean }[]>([
     { id: '1', user: 'Viper_FFWS', role: 'IGL', text: 'Looking for Tier-1 Scrims at 20:00 UTC. Bermuda + Purgatory 6 matches.', time: '18:40', verified: true },
@@ -64,16 +47,6 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
   const features = [
     {
       num: '01',
-      id: 'playbooks',
-      title: 'Visual Playbooks',
-      headline: 'Tactical Maps & Rotation Strategy',
-      description: 'Draw drops, rotations, fights, and contingencies on real Free Fire MAX maps, then keep every version ready for the squad.',
-      icon: Compass,
-      accent: '#FF9F1C',
-      tags: ['Bermuda', 'Purgatory', 'Alpine', 'Kalahari', 'Safe-Zone Prediction'],
-    },
-    {
-      num: '02',
       id: 'team-ops',
       title: 'Team Operations',
       headline: 'Rosters & Competitive Identity',
@@ -83,7 +56,7 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
       tags: ['IGL / Rusher / Sniper Roles', 'Scrim Schedule', 'Opponent Scouting', 'Loadout Sync'],
     },
     {
-      num: '03',
+      num: '02',
       id: 'match-intelligence',
       title: 'Match Intelligence',
       headline: 'Lobby Breakdown & Score Command',
@@ -93,7 +66,7 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
       tags: ['12-Point Booyah Matrix', 'Damage Heatmaps', 'Kill Conversion', 'Lobby Leaderboard'],
     },
     {
-      num: '04',
+      num: '03',
       id: 'community-chat',
       title: 'Global Community Chat & Squad Messaging',
       headline: 'Live Scrim Finder & Squad Channels',
@@ -131,8 +104,8 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
           </p>
         </div>
 
-        {/* Feature Cards Grid (4 Core Columns/Cards) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+        {/* Feature Cards Grid (3 Core Columns/Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
           {features.map((feat, index) => {
             const isSelected = activeFeature === index;
             const Icon = feat.icon;
@@ -143,10 +116,10 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
                 onClick={() => setActiveFeature(index)}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
-                className={`relative rounded-xl p-5 transition-all duration-300 cursor-pointer flex flex-col justify-between ${
+                className={`relative rounded-2xl p-6 transition-all duration-300 cursor-pointer flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-[#1F1F1F] border border-[#FF9F1C] shadow-[0_0_25px_rgba(255,159,28,0.2)]'
-                    : 'bg-[#1F1F1F]/40 hover:bg-[#1F1F1F]/80 border border-[#1F1F1F] hover:border-[#333]'
+                    ? 'bg-[#1F1F1F] border-2 border-[#FF9F1C] shadow-[0_0_25px_rgba(255,159,28,0.2)]'
+                    : 'bg-[#1F1F1F]/40 hover:bg-[#1F1F1F]/80 border border-[#262626] hover:border-[#3A3A3A]'
                 }`}
               >
                 {/* Number Badge & Icon */}
@@ -156,41 +129,41 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
                       {feat.num}
                     </span>
                     <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+                      className="w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
                       style={{
                         backgroundColor: isSelected ? '#FF9F1C' : '#141414',
                         color: isSelected ? '#000000' : '#FF9F1C',
                         border: '1px solid #2B2B2B',
                       }}
                     >
-                      <Icon className="w-4 h-4" />
+                      <Icon className="w-4.5 h-4.5" />
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-heading font-black uppercase text-white tracking-wide">
+                    <h3 className="text-base font-heading font-black uppercase text-white tracking-wide">
                       {feat.title}
                     </h3>
-                    <p className="text-[10px] font-bold text-[#FF9F1C] uppercase tracking-wider mt-0.5">
+                    <p className="text-xs font-bold text-[#FF9F1C] uppercase tracking-wider mt-0.5">
                       {feat.headline}
                     </p>
                   </div>
 
-                  <p className="text-[11px] text-neutral-400 leading-relaxed font-normal">
+                  <p className="text-xs text-neutral-400 leading-relaxed font-normal">
                     {feat.description}
                   </p>
                 </div>
 
                 {/* Bottom Active Indicator / Tags */}
-                <div className="pt-4 mt-3 border-t border-[#262626] flex items-center justify-between text-[10px]">
+                <div className="pt-4 mt-4 border-t border-[#262626] flex items-center justify-between text-xs">
                   <span className={`font-heading font-bold uppercase tracking-wider flex items-center gap-1.5 ${
                     isSelected ? 'text-[#FF9F1C]' : 'text-neutral-500'
                   }`}>
                     {isSelected ? 'ACTIVE PREVIEW' : 'CLICK TO PREVIEW'}
-                    <ChevronRight className="w-3 h-3" />
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </span>
                   {isSelected && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF9F1C] animate-ping" />
+                    <span className="w-2 h-2 rounded-full bg-[#FF9F1C] animate-ping" />
                   )}
                 </div>
               </motion.div>
@@ -204,7 +177,7 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
           {/* Top Tabs inside the sandbox */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#242424]">
             <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded bg-[#FF9F1C]/20 border border-[#FF9F1C]/40 text-[#FF9F1C] font-heading font-bold text-xs uppercase tracking-wider">
+              <span className="px-3 py-1 rounded-lg bg-[#FF9F1C]/20 border border-[#FF9F1C]/40 text-[#FF9F1C] font-heading font-bold text-xs uppercase tracking-wider">
                 FEATURE SANDBOX // {features[activeFeature].num}
               </span>
               <h4 className="text-xl font-heading font-bold text-white uppercase">
@@ -228,223 +201,10 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
           <div className="pt-8">
             <AnimatePresence mode="wait">
               
-              {/* VIEW 01: VISUAL PLAYBOOKS MAP ENGINE */}
+              {/* VIEW 01: TEAM OPERATIONS */}
               {activeFeature === 0 && (
                 <motion.div
                   key="feature-0"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
-                >
-                  {/* Left: Map Controls & Strategic Plan */}
-                  <div className="lg:col-span-5 space-y-5">
-                    {/* View Switcher: Photo / Satellite vs Vector Topo */}
-                    <div className="bg-[#141414] p-1.5 rounded-xl border border-[#222] flex items-center justify-between text-xs">
-                      <span className="text-neutral-400 font-heading font-bold uppercase text-[11px] px-2">
-                        Display Mode:
-                      </span>
-                      <div className="flex gap-1">
-                        <button
-                          type="button"
-                          onClick={() => setViewMode('photo')}
-                          className={`px-3 py-1 rounded-lg font-heading font-bold text-[11px] uppercase flex items-center gap-1 transition-colors cursor-pointer ${
-                            viewMode === 'photo'
-                              ? 'bg-[#FF9F1C] text-black font-black'
-                              : 'text-neutral-400 hover:text-white'
-                          }`}
-                        >
-                          <ImageIcon className="w-3.5 h-3.5" />
-                          <span>Tactical Photo / Satellite</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setViewMode('vector')}
-                          className={`px-3 py-1 rounded-lg font-heading font-bold text-[11px] uppercase flex items-center gap-1 transition-colors cursor-pointer ${
-                            viewMode === 'vector'
-                              ? 'bg-[#FF9F1C] text-black font-black'
-                              : 'text-neutral-400 hover:text-white'
-                          }`}
-                        >
-                          <Compass className="w-3.5 h-3.5" />
-                          <span>Vector Grid</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Tactics Step-by-Step Callouts */}
-                    <div className="space-y-2.5">
-                      <div className="text-xs font-mono text-neutral-400 font-semibold uppercase">
-                        Strategic Intel & Drop Callouts
-                      </div>
-                      
-                      <div className="bg-[#0D0D0D] p-3.5 rounded-xl border border-[#1F1F1F] space-y-1.5">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="font-heading font-bold text-white flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-[#38BDF8]" /> Phase 1: High-Loot Drop
-                          </span>
-                          <span className="text-[#38BDF8] font-mono">
-                            {activeMapData?.dropZones?.[0] || 'Primary Compound'}
-                          </span>
-                        </div>
-                        <p className="text-xs text-neutral-400">
-                          Secure Lv3 Armor, Gloo Wall generators, and high-velocity snipers before enemy squads contest.
-                        </p>
-                      </div>
-
-                      <div className="bg-[#0D0D0D] p-3.5 rounded-xl border border-[#1F1F1F] space-y-1.5">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="font-heading font-bold text-white flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-[#FF9F1C]" /> Phase 2: Rotation Intercept
-                          </span>
-                          <span className="text-[#FF9F1C] font-mono">
-                            {activeMapData?.chokePoints?.[0] || 'Ridge Choke Point'}
-                          </span>
-                        </div>
-                        <p className="text-xs text-neutral-400">
-                          {activeMapData?.description || 'Rotate via low-ground trenches and gatekeep rotating enemies into Zone 3.'}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right: Tactical Map Canvas Representation */}
-                  <div className="lg:col-span-7 bg-[#0A0D12] rounded-2xl border border-[#223042] p-5 relative overflow-hidden shadow-inner min-h-[400px] flex flex-col justify-between">
-                    {/* Header */}
-                    <div className="flex justify-between items-center z-10">
-                      <div className="flex items-center gap-2 text-xs font-heading font-bold text-white bg-black/80 px-3 py-1.5 rounded-lg border border-[#223042]">
-                        <Compass className="w-4 h-4 text-[#FF9F1C]" />
-                        <span>MAP: {activeMapData?.name.toUpperCase()}</span>
-                      </div>
-                      <span className="text-xs text-emerald-400 font-mono bg-emerald-500/15 px-2.5 py-1 rounded border border-emerald-500/30">
-                        ● 4 ROTATION ARROWS ACTIVE
-                      </span>
-                    </div>
-
-                    {/* Canvas Area: PHOTO VIEW OR VECTOR BLUEPRINT */}
-                    <div className="relative my-3 rounded-xl overflow-hidden min-h-[260px] flex items-center justify-center bg-[#07090D] border border-[#1D2838]">
-                      {viewMode === 'photo' && activeMapData?.imageUrl ? (
-                        <div className="relative w-full h-64 sm:h-72">
-                          {/* Real uploaded / designated tactical map image */}
-                          <img
-                            src={activeMapData.imageUrl}
-                            alt={activeMapData.name}
-                            className="w-full h-full object-cover opacity-85"
-                          />
-                          
-                          {/* Tactical HUD Overlay with Grid */}
-                          <div className="absolute inset-0 bg-tactical-grid opacity-30 pointer-events-none" />
-
-                          {/* Safe Zone Rings Overlay */}
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border-2 border-dashed border-[#FF9F1C] bg-[#FF9F1C]/10 flex items-center justify-center pointer-events-none shadow-[0_0_20px_rgba(255,159,28,0.2)]">
-                            <div className="w-24 h-24 rounded-full border border-emerald-400 bg-emerald-400/15" />
-                          </div>
-
-                          {/* Tactical Pins (Clean icon dots, no text overlay) */}
-                          {activeMapData.dropZones?.slice(0, 2).map((dz, idx) => (
-                            <div
-                              key={idx}
-                              style={{
-                                top: idx === 0 ? '30%' : '65%',
-                                left: idx === 0 ? '25%' : '70%',
-                              }}
-                              title={`Drop Zone: ${dz}`}
-                              className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                            >
-                              <div className="w-4 h-4 rounded-full bg-[#38BDF8] border-2 border-white shadow-lg animate-pulse" />
-                            </div>
-                          ))}
-
-                          {/* Dynamic Choke Point Flag (Clean amber pin, no text overlay) */}
-                          {activeMapData.chokePoints?.[0] && (
-                            <div
-                              style={{ top: '48%', left: '52%' }}
-                              title={`Choke Point: ${activeMapData.chokePoints[0]}`}
-                              className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                            >
-                              <div className="w-4 h-4 rounded-full bg-[#FF9F1C] border-2 border-white shadow-lg" />
-                            </div>
-                          )}
-                        </div>
-                      ) : (
-                        /* Vector Map Fallback View (Clean, no text overlay) */
-                        <svg viewBox="0 0 500 280" className="w-full h-64">
-                          {/* Landmass Outlines */}
-                          <path
-                            d="M 40 100 Q 120 20 250 40 T 450 90 T 420 240 T 200 260 T 50 180 Z"
-                            fill="#131C28"
-                            stroke="#27394E"
-                            strokeWidth="2.5"
-                          />
-                          {/* River / Water Channel */}
-                          <path
-                            d="M 120 20 Q 220 120 380 260"
-                            fill="none"
-                            stroke="#1A2838"
-                            strokeWidth="14"
-                          />
-                          {/* Contour elevation lines */}
-                          <path
-                            d="M 160 80 Q 240 70 320 120 T 280 200 T 160 160 Z"
-                            fill="#192535"
-                            stroke="#2A3D55"
-                            strokeWidth="1.5"
-                          />
-
-                          {/* Safe Zone Circles */}
-                          <circle cx="280" cy="140" r="95" fill="none" stroke="#FF9F1C" strokeWidth="2.5" strokeDasharray="6 4" />
-                          <circle cx="295" cy="135" r="55" fill="rgba(255, 159, 28, 0.1)" stroke="#FF9F1C" strokeWidth="2" />
-                          <circle cx="305" cy="130" r="25" fill="rgba(52, 211, 153, 0.2)" stroke="#34D399" strokeWidth="1.5" />
-
-                          {/* Drop & Hold Locations (Clean nodes without text overlay) */}
-                          <circle cx="100" cy="130" r="7" fill="#38BDF8" stroke="#FFFFFF" strokeWidth="1.5" />
-                          <circle cx="150" cy="220" r="6" fill="#EF4444" stroke="#FFFFFF" strokeWidth="1.5" />
-                          <circle cx="295" cy="135" r="8" fill="#FF9F1C" stroke="#FFFFFF" strokeWidth="2" />
-
-                          {/* Rotation Tactical Arrows */}
-                          <path
-                            d="M 105 130 Q 160 110 220 135 T 290 135"
-                            fill="none"
-                            stroke="#38BDF8"
-                            strokeWidth="3.5"
-                            strokeDasharray="5 5"
-                          />
-                          <path
-                            d="M 220 135 Q 260 190 295 145"
-                            fill="none"
-                            stroke="#FF9F1C"
-                            strokeWidth="2"
-                            strokeDasharray="3 3"
-                          />
-                        </svg>
-                      )}
-                    </div>
-
-                    {/* Bottom HUD Bar */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 text-xs bg-black/80 p-3 rounded-xl border border-[#223042] z-10">
-                      <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1.5 text-sky-400 font-bold">
-                          <span className="w-2.5 h-2.5 rounded-full bg-sky-400" /> Drop Ingest
-                        </span>
-                        <span className="flex items-center gap-1.5 text-amber-400 font-bold">
-                          <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> Circle Prediction
-                        </span>
-                        <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" /> Squad Live Sync
-                        </span>
-                      </div>
-                      <span className="text-neutral-400 font-mono">
-                        Author: {activeMapData?.author || 'Esports Ops'}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* VIEW 02: TEAM OPERATIONS */}
-              {activeFeature === 1 && (
-                <motion.div
-                  key="feature-1"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -505,10 +265,10 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
                 </motion.div>
               )}
 
-              {/* VIEW 03: MATCH INTELLIGENCE & SCORE COMMAND */}
-              {activeFeature === 2 && (
+              {/* VIEW 02: MATCH INTELLIGENCE & SCORE COMMAND */}
+              {activeFeature === 1 && (
                 <motion.div
-                  key="feature-2"
+                  key="feature-1"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -630,10 +390,10 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ mediaConfig })
                 </motion.div>
               )}
 
-              {/* VIEW 04: GLOBAL COMMUNITY CHAT */}
-              {activeFeature === 3 && (
+              {/* VIEW 03: GLOBAL COMMUNITY CHAT */}
+              {activeFeature === 2 && (
                 <motion.div
-                  key="feature-3"
+                  key="feature-2"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
