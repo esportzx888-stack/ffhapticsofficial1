@@ -1,0 +1,6 @@
+{
+  "name": "FF TACTIX",
+  "description": "The operating system for Free Fire MAX esports. Plan rotations, align your squad, capture match intelligence, and preserve every competitive advantage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
